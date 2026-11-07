@@ -56,3 +56,13 @@ stockguard:
   jwt:
     secret: ${JWT_SECRET:stockguard_default_dev_secret_key_replace_in_production_32chars!}
     expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  admin:
+    email: ${STOCKGUARD_ADMIN_EMAIL:}
+    password: ${STOCKGUARD_ADMIN_PASSWORD:}
+    first-name: ${STOCKGUARD_ADMIN_FIRST_NAME:System}
+    last-name: ${STOCKGUARD_ADMIN_LAST_NAME:Admin}
+  demo:
+    customer:
+      email: ${STOCKGUARD_DEMO_CUSTOMER_EMAIL:customer@stockguard.io}
+      password: ${STOCKGUARD_DEMO_CUSTOMER_PASSWORD:Customer123!}
+      enabled: ${STOCKGUARD_DEMO_CUSTOMER_ENABLED:true}

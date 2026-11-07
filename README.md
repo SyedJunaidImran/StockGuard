@@ -283,9 +283,9 @@ npm run dev
 ```
 Open `http://localhost:5173` in your browser.
 
-### Quick-Fill Demo Credentials (Pre-Seeded)
-- **Administrator:** `admin@stockguard.io` / `Admin123!`
-- **Customer:** `customer@stockguard.io` / `Customer123!`
+### Demo Credentials & Access
+- **Customer Demo (Public):** `customer@stockguard.io` / `Customer123!` (or 1-click Quick-Fill in the UI).
+- **Administrator Console:** Administrator access is restricted and configured server-side via environment variables (`STOCKGUARD_ADMIN_EMAIL` and `STOCKGUARD_ADMIN_PASSWORD`). Admin credentials are never hardcoded or exposed in public client bundles.
 
 ---
 

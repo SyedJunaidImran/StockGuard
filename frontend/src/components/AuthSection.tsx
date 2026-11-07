@@ -283,31 +283,9 @@ export const AuthSection: React.FC = () => {
                     gap: '0.5rem'
                   }}>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                      ⚡ Quick Fill Demo Accounts
+                      ⚡ Quick Fill Demo Account
                     </span>
                     <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                      <button
-                        type="button"
-                        id="quick-fill-admin"
-                        onClick={() => {
-                          setLoginEmail('admin@stockguard.io');
-                          setLoginPassword('Admin123!');
-                          setLoginError(null);
-                        }}
-                        style={{
-                          fontSize: '0.78rem',
-                          padding: '0.35rem 0.65rem',
-                          borderRadius: 'var(--radius-sm)',
-                          background: 'rgba(56, 189, 248, 0.12)',
-                          border: '1px solid rgba(56, 189, 248, 0.35)',
-                          color: 'var(--accent-cyan)',
-                          cursor: 'pointer',
-                          fontWeight: 500,
-                          transition: 'all 0.15s ease'
-                        }}
-                      >
-                        🛡️ Admin (admin@stockguard.io)
-                      </button>
                       <button
                         type="button"
                         id="quick-fill-customer"
@@ -328,7 +306,7 @@ export const AuthSection: React.FC = () => {
                           transition: 'all 0.15s ease'
                         }}
                       >
-                        👤 Customer (customer@stockguard.io)
+                        👤 Customer Demo (customer@stockguard.io)
                       </button>
                     </div>
                   </div>

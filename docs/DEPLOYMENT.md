@@ -132,6 +132,8 @@ The Dockerfile configures:
 | `JWT_EXPIRATION_MS` | `86400000` *(24 hours)* |
 | `CORS_ALLOWED_ORIGINS` | `http://localhost:5173` *(update with Vercel URL after Step 5)* |
 | `JAVA_TOOL_OPTIONS` | `-XX:+UseContainerSupport -XX:MaxRAMPercentage=60.0 -Xss512k -XX:+ExitOnOutOfMemoryError` |
+| `STOCKGUARD_ADMIN_EMAIL` | *(Optional)* Dedicated admin email address to provision or synchronize (e.g. `admin@yourdomain.com`) |
+| `STOCKGUARD_ADMIN_PASSWORD` | *(Optional)* Secure admin password (sets or rotates the admin password safely on startup without database edits) |
 
 ### Generating a Secure 256-Bit JWT Secret
 Run one of the following commands in your local terminal to generate a secure secret:
@@ -218,8 +220,8 @@ curl -s https://<your-render-backend>.onrender.com/api/v1/health
 - Verify that order totals match authoritative server-side calculation.
 - Verify product stock decrements immediately upon return to the catalog.
 
-### 5. Administrative Audit Ledger
-- Log in with default seed credentials:
-  - **Email**: `admin@stockguard.io`
-  - **Password**: `Admin123!`
+### 5. Administrative Console & Audit Ledger
+- Log in with your configured administrator credentials (provisioned via `STOCKGUARD_ADMIN_EMAIL` and `STOCKGUARD_ADMIN_PASSWORD` in Render).
+- Access the **Inventory Management** console.
 - Open the **Inventory Ledger** drawer and verify the append-only movement record reflects the order purchase with previous stock, quantity change, new stock, and customer actor ID.
+- Perform a manual stock adjustment (+Restock or -Write-off) with an audit reason and verify immediate ledger propagation.

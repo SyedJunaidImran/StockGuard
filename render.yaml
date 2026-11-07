@@ -28,3 +28,7 @@ services:
         sync: false
       - key: JAVA_TOOL_OPTIONS
         value: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=60.0 -Xss512k -XX:+ExitOnOutOfMemoryError"
+      - key: STOCKGUARD_ADMIN_EMAIL
+        sync: false
+      - key: STOCKGUARD_ADMIN_PASSWORD
+        sync: false
