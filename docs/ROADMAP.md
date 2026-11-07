@@ -17,11 +17,11 @@ This document preserves the comprehensive multi-phase engineering roadmap for **
    │
 [Phase 5] High-Concurrency Order Placement & Price Snapshots (Completed)
    │
-[Phase 6] PostgreSQL Testcontainers, RFC 4122 Idempotency & Transaction Gap Resolution (Implementation Completed)
+[Phase 6] PostgreSQL Testcontainers, RFC 4122 Idempotency & Transaction Gap Resolution (Completed)
    │
-[Phase 7] Remote GitHub Actions CI Verification with Live PostgreSQL 16 (Pending CI Execution)
+[Phase 7] Remote GitHub Actions CI Verification with Live PostgreSQL 16 (Completed)
    │
-[Phase 8] Production Cloud Deployment: Supabase & Render / Railway (Planned)
+[Phase 8] Production Cloud Deployment: Supabase & Render / Vercel (Deployment-Ready)
    │
 [Phase 9] Production Smoke Verification, Live Telemetry & Portfolio Finalization (Planned)
 ```
@@ -92,7 +92,7 @@ This document preserves the comprehensive multi-phase engineering roadmap for **
 ---
 
 ### Phase 6: PostgreSQL Integration Harness & RFC 4122 Idempotency
-* **Status:** `IMPLEMENTATION COMPLETED` *(Local Compilation Clean; CI Verification Pending)*
+* **Status:** `COMPLETED`
 * **Focus:** RFC 4122 v4 idempotency deduplication, transaction-gap race condition elimination, stalled/failed recovery, and Testcontainers integration test harness.
 * **Deliverables:**
   - Idempotent checkout engine using client-supplied `Idempotency-Key` headers.
@@ -105,7 +105,7 @@ This document preserves the comprehensive multi-phase engineering roadmap for **
 ---
 
 ### Phase 7: PostgreSQL CI Automation & Verification
-* **Status:** `PENDING CI EXECUTION`
+* **Status:** `COMPLETED`
 * **Focus:** Automated validation of all 7 PostgreSQL concurrency scenarios in GitHub Actions.
 * **Deliverables:**
   - Dedicated GitHub Actions CI service container running real `postgres:16-alpine`.
@@ -123,12 +123,12 @@ This document preserves the comprehensive multi-phase engineering roadmap for **
 ---
 
 ### Phase 8: Production Cloud Deployment
-* **Status:** `PLANNED`
-* **Focus:** Cloud infrastructure provisioning, managed relational database setup, production secrets management, and SSL termination.
+* **Status:** `DEPLOYMENT-READY` ([Deployment Guide](DEPLOYMENT.md))
+* **Focus:** Cloud infrastructure configuration (Render / Supabase / Vercel), production secrets management, and SSL termination.
 * **Deliverables:**
-  - Managed PostgreSQL instance on Supabase or Render Postgres with connection pooling (HikariCP / Supavisor).
-  - Backend Spring Boot 3 container deployment on Render or Railway with health check probes (`/api/v1/health`).
-  - Frontend React 18 production build deployment on Vercel, Netlify, or Cloudflare Pages with edge CDN caching.
+  - Hosted PostgreSQL 16 instance on Supabase with direct/session connection pooling (HikariCP tuned for Supavisor) and SSL enforcement.
+  - Backend Spring Boot 3 multi-stage container deployment on Render with memory cgroup safety caps and health check probes (`/api/v1/health`).
+  - Frontend React 18 production build deployment on Vercel with edge CDN caching and SPA rewrite configuration (`vercel.json`).
   - Production secrets management: secure generation of 256-bit HMAC-SHA JWT secret keys and database credentials via cloud environment variables.
   - Cross-Origin Resource Sharing (CORS) hardening restricted to production domain origins.
 

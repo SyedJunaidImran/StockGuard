@@ -319,11 +319,11 @@ See [docs/TESTING.md](docs/TESTING.md) for full scenario walkthroughs and CI set
 
 ---
 
-## 11. Deployment Architecture & Cloud Strategy (Status: Pending)
+## 11. Deployment Architecture & Cloud Strategy (Status: Deployment-Ready)
 
 > [!NOTE]
-> **Deployment Status: PENDING CLOUD PROVISIONING.**
-> StockGuard is currently verified in local and containerized development/test environments. Remote cloud deployment is planned for **Phase 8** and has not yet been executed. The repository is configured and ready for deployment following infrastructure provisioning.
+> **Deployment Status: DEPLOYMENT-READY.**
+> StockGuard is verified across both local containerized environments and GitHub Actions CI with live PostgreSQL 16. Cloud deployment configurations ([`render.yaml`](render.yaml), [`frontend/vercel.json`](frontend/vercel.json), and [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)) are prepared and ready for provisioning on Supabase, Render, and Vercel.
 
 ### Planned Production Cloud Topology:
 * **Managed Database:** Hosted PostgreSQL 16 on **Supabase** or **Render Postgres** with connection pooling (HikariCP tuned for Supavisor session/transaction mode) and SSL enforcement (`sslmode=require`).
@@ -355,6 +355,7 @@ See [docs/ROADMAP.md](docs/ROADMAP.md) for full phase-by-phase engineering deliv
 
 For detailed engineering references, explore the dedicated documentation suite:
 * **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md):** Modular monolith domain boundaries, Mermaid sequence diagrams, ER entity diagrams, and lock ordering.
+* **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md):** Production cloud deployment manual covering Supabase connection modes, Render Docker backend, and Vercel frontend.
 * **[docs/TESTING.md](docs/TESTING.md):** In-memory H2 suite, Testcontainers dynamic discovery, and detailed walkthroughs of all 7 PostgreSQL concurrency scenarios.
 * **[docs/ROADMAP.md](docs/ROADMAP.md):** Complete 9-phase development history, current statuses, and future milestones.
 * **[docs/DATABASE_SCHEMA.md](docs/DATABASE_SCHEMA.md):** Relational tables, Flyway migrations, check constraints, and index optimizations.

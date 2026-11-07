@@ -88,7 +88,7 @@ StockGuard provides a multi-stage `backend/Dockerfile` using Eclipse Temurin 21 
 ### Memory Optimization for Render Free Tier (512MB RAM)
 The Dockerfile configures:
 - `-XX:+UseContainerSupport`: Instructs the JVM to respect cgroup memory limits.
-- `-XX:MaxRAMPercentage=75.0`: Limits heap allocation to 384MB on a 512MB container, reserving 128MB for Metaspace, thread stacks, and OS overhead.
+- `-XX:MaxRAMPercentage=60.0`: Limits heap allocation to ~307MB on a 512MB container, reserving ~205MB for Metaspace, CodeCache, thread stacks, and OS cgroup buffers.
 - `-Xss512k`: Reduces per-thread stack size from default 1024k to 512k.
 - `-XX:+ExitOnOutOfMemoryError`: Halts the JVM immediately on OOM so Render can perform a clean container restart.
 
@@ -103,15 +103,19 @@ The Dockerfile configures:
 #### Option B: Manual Web Service Setup
 1. In the Render Dashboard, click **New +** &rarr; **Web Service**.
 2. Connect your GitHub repository.
-3. Configure the service settings:
+3. Configure the service settings based on your chosen Root Directory:
    - **Name**: `stockguard-backend`
    - **Region**: Choose closest to your Supabase region (e.g. `Oregon (US West)` or `Frankfurt (EU)`)
    - **Branch**: `main`
-   - **Root Directory**: `backend`
    - **Runtime**: `Docker`
-   - **Dockerfile Path**: `backend/Dockerfile`
-   - **Docker Context**: `backend`
    - **Plan**: `Free`
+   - **Path Configuration**:
+     - *If Root Directory is left as repository root (`.`)*:
+       - **Dockerfile Path**: `backend/Dockerfile`
+       - **Docker Context**: `backend`
+     - *If Root Directory is set to `backend`*:
+       - **Dockerfile Path**: `Dockerfile`
+       - **Docker Context**: `.`
 4. Expand **Advanced Settings**:
    - **Health Check Path**: `/api/v1/health`
 5. Inject the required Environment Variables:
@@ -127,7 +131,7 @@ The Dockerfile configures:
 | `JWT_SECRET` | *(64-char hex string — see generator command below)* |
 | `JWT_EXPIRATION_MS` | `86400000` *(24 hours)* |
 | `CORS_ALLOWED_ORIGINS` | `http://localhost:5173` *(update with Vercel URL after Step 5)* |
-| `JAVA_TOOL_OPTIONS` | `-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -Xss512k` |
+| `JAVA_TOOL_OPTIONS` | `-XX:+UseContainerSupport -XX:MaxRAMPercentage=60.0 -Xss512k -XX:+ExitOnOutOfMemoryError` |
 
 ### Generating a Secure 256-Bit JWT Secret
 Run one of the following commands in your local terminal to generate a secure secret:

@@ -27,4 +27,4 @@ services:
       - key: CORS_ALLOWED_ORIGINS
         sync: false
       - key: JAVA_TOOL_OPTIONS
-        value: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -Xss512k"
+        value: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=60.0 -Xss512k -XX:+ExitOnOutOfMemoryError"
