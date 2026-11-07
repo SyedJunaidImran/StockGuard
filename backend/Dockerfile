@@ -12,13 +12,13 @@ COPY .mvn .mvn
 COPY mvnw pom.xml ./
 
 # Cache Maven dependencies offline
-RUN ./mvnw dependency:go-offline -B
+RUN sh ./mvnw dependency:go-offline -B
 
 # Copy application source code
 COPY src src
 
 # Build executable JAR without running tests (tests run in CI pipeline)
-RUN ./mvnw clean package -DskipTests -B
+RUN sh ./mvnw clean package -DskipTests
 
 # ==============================================================================
 # Stage 2: Runtime image
