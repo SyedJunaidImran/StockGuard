@@ -1,0 +1,67 @@
+# StockGuard Root .gitignore
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Operating System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+[Nn]et[Hh]ood
+[Tt]rash-*
+Desktop.ini
+
+# IDE & Editor files
+.idea/
+*.iml
+*.iws
+.vscode/
+*.code-workspace
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Build outputs - Java / Maven
+backend/target/
+backend/**/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+!backend/.mvn/wrapper/maven-wrapper.jar
+
+# Build outputs - Node / Vite / Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/*.local
+frontend/.pnpm-store/
+frontend/.yarn/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Database & local runtime logs
+logs/
+*.log
+*.sqlite
+data/
+pgdata/
+
+# Test coverage & reports
+backend/**/surefire-reports/
+backend/**/failsafe-reports/
+backend/**/site/
+coverage/
+.nyc_output/

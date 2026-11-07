@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="50%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="700" fill="url(#bgGrad)"/>
+  <rect width="1200" height="700" fill="none" stroke="#334155" stroke-width="2"/>
+
+  <!-- Top Navbar -->
+  <rect x="0" y="0" width="1200" height="64" fill="#0f172a" fill-opacity="0.95" stroke="#334155" stroke-width="1"/>
+  
+  <!-- Logo -->
+  <g transform="translate(40, 16)">
+    <rect width="32" height="32" rx="8" fill="url(#cyanGrad)"/>
+    <path d="M16 6 L24 10 L24 18 C24 23 16 26 16 26 C16 26 8 23 8 18 L8 10 Z" fill="none" stroke="#020617" stroke-width="2.2" stroke-linejoin="round"/>
+    <text x="44" y="22" fill="#f8fafc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="18" font-weight="700">StockGuard</text>
+  </g>
+
+  <!-- Nav links -->
+  <g transform="translate(420, 24)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="500">
+    <rect x="-10" y="-8" width="80" height="32" rx="6" fill="#38bdf8" fill-opacity="0.15"/>
+    <text x="0" y="13" fill="#38bdf8" font-weight="600">Catalog</text>
+    <text x="110" y="13" fill="#94a3b8">Inventory</text>
+    <text x="210" y="13" fill="#94a3b8">Account</text>
+  </g>
+
+  <!-- Cart Button -->
+  <g transform="translate(1040, 16)">
+    <rect width="120" height="34" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="1" stroke-opacity="0.4"/>
+    <path d="M18 10 h4 l3 11 h12 l3 -8 h-16" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="26" cy="24" r="1.5" fill="#38bdf8"/>
+    <circle cx="36" cy="24" r="1.5" fill="#38bdf8"/>
+    <text x="46" y="22" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="13" font-weight="600">Cart</text>
+    <circle cx="98" cy="17" r="9" fill="#38bdf8"/>
+    <text x="95" y="21" fill="#020617" font-family="-apple-system, sans-serif" font-size="11" font-weight="800">3</text>
+  </g>
+
+  <!-- Header Section -->
+  <g transform="translate(40, 95)">
+    <rect width="130" height="26" rx="13" fill="#38bdf8" fill-opacity="0.1" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="14" y="17" fill="#38bdf8" font-family="-apple-system, sans-serif" font-size="12" font-weight="600">Product Catalog</text>
+    <text x="0" y="58" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="28" font-weight="700">Enterprise Hardware &amp; Components</text>
+    <text x="0" y="82" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="14">Browse real-time warehouse inventory with automated row-level concurrency protection.</text>
+  </g>
+
+  <!-- Controls Bar: Search & Category Chips -->
+  <g transform="translate(40, 200)">
+    <rect width="1120" height="60" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+    <!-- Search Input -->
+    <rect x="16" y="12" width="340" height="36" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+    <circle cx="36" cy="30" r="6" fill="none" stroke="#94a3b8" stroke-width="1.8"/>
+    <line x1="41" y1="35" x2="47" y2="41" stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round"/>
+    <text x="56" y="35" fill="#64748b" font-family="-apple-system, sans-serif" font-size="13">Search products by name or SKU...</text>
+    
+    <!-- Category Chips -->
+    <g transform="translate(380, 14)">
+      <rect x="0" y="0" width="60" height="32" rx="6" fill="#38bdf8" fill-opacity="0.2" stroke="#38bdf8" stroke-width="1"/>
+      <text x="18" y="20" fill="#38bdf8" font-family="-apple-system, sans-serif" font-size="13" font-weight="600">All</text>
+      
+      <rect x="70" y="0" width="80" height="32" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <text x="86" y="20" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="13">Compute</text>
+      
+      <rect x="160" y="0" width="80" height="32" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <text x="178" y="20" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="13">Storage</text>
+      
+      <rect x="250" y="0" width="90" height="32" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <text x="268" y="20" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="13">Networking</text>
+    </g>
+
+    <!-- Sort Dropdown -->
+    <g transform="translate(980, 14)">
+      <rect width="120" height="32" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <text x="16" y="20" fill="#cbd5e1" font-family="-apple-system, sans-serif" font-size="12">Sort: Newest</text>
+      <path d="M96 18 L102 14 L108 18" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Product Cards Grid (4 Cards) -->
+  
+  <!-- Card 1 -->
+  <g transform="translate(40, 280)" filter="url(#shadow)">
+    <rect width="262" height="380" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+    <!-- Image Box -->
+    <rect x="12" y="12" width="238" height="150" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+    <path d="M100 70 L131 52 L162 70 L162 104 L131 122 L100 104 Z" fill="none" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.4"/>
+    <circle cx="131" cy="87" r="14" fill="#38bdf8" fill-opacity="0.2"/>
+    <text x="131" y="91" fill="#38bdf8" font-family="monospace" font-size="10" font-weight="700" text-anchor="middle">CPU</text>
+    <!-- SKU & Category -->
+    <text x="16" y="185" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="600">SKU-EPYC-9654</text>
+    <rect x="180" y="172" width="66" height="18" rx="4" fill="#334155" fill-opacity="0.5"/>
+    <text x="188" y="185" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="10">Compute</text>
+    <!-- Title & Desc -->
+    <text x="16" y="210" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">AMD EPYC 9654 Processor</text>
+    <text x="16" y="228" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11">96-Core 192-Thread 3.7GHz 384MB</text>
+    <!-- Badge -->
+    <rect x="16" y="246" width="124" height="22" rx="11" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-opacity="0.3" stroke-width="1"/>
+    <circle cx="26" cy="257" r="3.5" fill="#10b981"/>
+    <text x="35" y="261" fill="#10b981" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">In Stock (18 units)</text>
+    <!-- Price & Button -->
+    <line x1="16" y1="315" x2="246" y2="315" stroke="#334155" stroke-width="1"/>
+    <text x="16" y="340" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">Unit Price</text>
+    <text x="16" y="362" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="18" font-weight="700">$11,899.00</text>
+    <rect x="160" y="330" width="86" height="34" rx="6" fill="#38bdf8"/>
+    <text x="182" y="352" fill="#020617" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">+ Add</text>
+  </g>
+
+  <!-- Card 2 -->
+  <g transform="translate(326, 280)" filter="url(#shadow)">
+    <rect width="262" height="380" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+    <rect x="12" y="12" width="238" height="150" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+    <path d="M95 65 h72 v54 h-72 Z" fill="none" stroke="#6366f1" stroke-width="2" stroke-opacity="0.5"/>
+    <circle cx="131" cy="92" r="14" fill="#6366f1" fill-opacity="0.2"/>
+    <text x="131" y="96" fill="#818cf8" font-family="monospace" font-size="10" font-weight="700" text-anchor="middle">GPU</text>
+    <text x="16" y="185" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="600">SKU-NV-RTX6000</text>
+    <rect x="180" y="172" width="66" height="18" rx="4" fill="#334155" fill-opacity="0.5"/>
+    <text x="188" y="185" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="10">Compute</text>
+    <text x="16" y="210" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">NVIDIA RTX 6000 Ada</text>
+    <text x="16" y="228" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11">48GB GDDR6 ECC PCIe 4.0 Pro</text>
+    <rect x="16" y="246" width="134" height="22" rx="11" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-opacity="0.3" stroke-width="1"/>
+    <circle cx="26" cy="257" r="3.5" fill="#f59e0b"/>
+    <text x="35" y="261" fill="#f59e0b" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">Low Stock (2 left)</text>
+    <line x1="16" y1="315" x2="246" y2="315" stroke="#334155" stroke-width="1"/>
+    <text x="16" y="340" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">Unit Price</text>
+    <text x="16" y="362" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="18" font-weight="700">$6,800.00</text>
+    <rect x="160" y="330" width="86" height="34" rx="6" fill="#38bdf8"/>
+    <text x="182" y="352" fill="#020617" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">+ Add</text>
+  </g>
+
+  <!-- Card 3 -->
+  <g transform="translate(612, 280)" filter="url(#shadow)">
+    <rect width="262" height="380" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+    <rect x="12" y="12" width="238" height="150" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+    <rect x="95" y="70" width="72" height="40" rx="4" fill="none" stroke="#10b981" stroke-width="2" stroke-opacity="0.5"/>
+    <circle cx="131" cy="90" r="12" fill="#10b981" fill-opacity="0.2"/>
+    <text x="131" y="94" fill="#34d399" font-family="monospace" font-size="10" font-weight="700" text-anchor="middle">SSD</text>
+    <text x="16" y="185" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="600">SKU-SAMS-PM1743</text>
+    <rect x="186" y="172" width="60" height="18" rx="4" fill="#334155" fill-opacity="0.5"/>
+    <text x="194" y="185" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="10">Storage</text>
+    <text x="16" y="210" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Samsung PM1743 15.36TB</text>
+    <text x="16" y="228" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11">PCIe 5.0 Enterprise NVMe U.2 SSD</text>
+    <rect x="16" y="246" width="124" height="22" rx="11" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-opacity="0.3" stroke-width="1"/>
+    <circle cx="26" cy="257" r="3.5" fill="#10b981"/>
+    <text x="35" y="261" fill="#10b981" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">In Stock (45 units)</text>
+    <line x1="16" y1="315" x2="246" y2="315" stroke="#334155" stroke-width="1"/>
+    <text x="16" y="340" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">Unit Price</text>
+    <text x="16" y="362" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="18" font-weight="700">$2,450.00</text>
+    <rect x="160" y="330" width="86" height="34" rx="6" fill="#38bdf8"/>
+    <text x="182" y="352" fill="#020617" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">+ Add</text>
+  </g>
+
+  <!-- Card 4 -->
+  <g transform="translate(898, 280)" filter="url(#shadow)">
+    <rect width="262" height="380" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+    <rect x="12" y="12" width="238" height="150" rx="8" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+    <path d="M95 85 L167 85 M105 70 L157 70 M115 100 L147 100" stroke="#f43f5e" stroke-width="2" stroke-linecap="round" stroke-opacity="0.5"/>
+    <circle cx="131" cy="85" r="12" fill="#f43f5e" fill-opacity="0.2"/>
+    <text x="131" y="89" fill="#fb7185" font-family="monospace" font-size="9" font-weight="700" text-anchor="middle">NIC</text>
+    <text x="16" y="185" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="600">SKU-MELX-CX7</text>
+    <rect x="174" y="172" width="72" height="18" rx="4" fill="#334155" fill-opacity="0.5"/>
+    <text x="180" y="185" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="10">Networking</text>
+    <text x="16" y="210" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">ConnectX-7 400GbE NIC</text>
+    <text x="16" y="228" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11">Dual-Port OSFP PCIe 5.0 x16 Adapter</text>
+    <rect x="16" y="246" width="124" height="22" rx="11" fill="#f43f5e" fill-opacity="0.15" stroke="#f43f5e" stroke-opacity="0.3" stroke-width="1"/>
+    <circle cx="26" cy="257" r="3.5" fill="#f43f5e"/>
+    <text x="35" y="261" fill="#f43f5e" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">Out of Stock (0 units)</text>
+    <line x1="16" y1="315" x2="246" y2="315" stroke="#334155" stroke-width="1"/>
+    <text x="16" y="340" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11">Unit Price</text>
+    <text x="16" y="362" fill="#64748b" font-family="-apple-system, sans-serif" font-size="18" font-weight="700">$3,120.00</text>
+    <rect x="160" y="330" width="86" height="34" rx="6" fill="#334155" opacity="0.6"/>
+    <text x="178" y="352" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="12" font-weight="600">Sold Out</text>
+  </g>
+</svg>
+

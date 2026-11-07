@@ -1,0 +1,13 @@
+# Development Profile Configuration
+logging:
+  level:
+    root: INFO
+    com.stockguard: DEBUG
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.flywaydb: INFO
+
+stockguard:
+  environment: development

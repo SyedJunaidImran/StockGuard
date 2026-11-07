@@ -1,0 +1,38 @@
+# Production Profile Configuration
+# Tuned for Render Free Tier (512MB RAM) and Supabase Free Tier (Connection Pooler)
+
+spring:
+  datasource:
+    hikari:
+      pool-name: StockGuardProdHikariPool
+      # Keep pool small to avoid exhausting Supabase free connection limits
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 900000
+      leak-detection-threshold: 15000
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+logging:
+  level:
+    root: WARN
+    com.stockguard: INFO
+    org.springframework.web: WARN
+    org.springframework.security: WARN
+    org.hibernate: ERROR
+    org.flywaydb: INFO
+
+stockguard:
+  environment: production
+
+server:
+  error:
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never

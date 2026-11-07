@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="modalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <filter id="modalShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="720" fill="url(#bgGrad)"/>
+  <rect width="1000" height="720" fill="#000000" fill-opacity="0.65"/>
+
+  <!-- Modal Container -->
+  <g transform="translate(140, 40)" filter="url(#modalShadow)">
+    <rect width="720" height="640" rx="16" fill="url(#modalGrad)" stroke="#334155" stroke-width="1.5"/>
+
+    <!-- Header -->
+    <g transform="translate(24, 24)">
+      <rect width="36" height="36" rx="8" fill="#10b981" fill-opacity="0.15"/>
+      <path d="M12 18 L18 12 L30 18 L24 24 Z M12 18 L12 24 L18 28 L18 22 Z M30 18 L30 24 L24 28 L24 22 Z" fill="none" stroke="#10b981" stroke-width="1.8" stroke-linejoin="round"/>
+      
+      <text x="48" y="20" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="18" font-weight="700">Order Details</text>
+      <text x="48" y="34" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="12">Order ORDER-2026-8841 • Placed via customer session</text>
+
+      <!-- Close Button -->
+      <g transform="translate(645, 4)">
+        <circle cx="10" cy="10" r="14" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+        <path d="M6 6 L14 14 M14 6 L6 14" stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <line x1="0" y1="76" x2="720" y2="76" stroke="#334155" stroke-width="1"/>
+
+    <!-- Breadcrumb back -->
+    <g transform="translate(24, 94)">
+      <rect width="150" height="30" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+      <path d="M16 15 L22 9 M16 15 L22 21" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round"/>
+      <text x="28" y="19" fill="#38bdf8" font-family="-apple-system, sans-serif" font-size="12" font-weight="600">Back to Orders List</text>
+    </g>
+
+    <!-- Order Metadata Summary Card -->
+    <g transform="translate(24, 136)">
+      <rect width="672" height="120" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+      
+      <!-- Top info row -->
+      <text x="20" y="28" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="11" text-transform="uppercase" letter-spacing="1">Order Reference Number</text>
+      <text x="20" y="52" fill="#f8fafc" font-family="monospace" font-size="20" font-weight="700">ORDER-2026-8841</text>
+
+      <!-- Status badge -->
+      <g transform="translate(530, 24)">
+        <rect width="122" height="28" rx="14" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-opacity="0.3" stroke-width="1"/>
+        <circle cx="16" cy="14" r="3.5" fill="#10b981"/>
+        <text x="26" y="18" fill="#10b981" font-family="-apple-system, sans-serif" font-size="12" font-weight="700">CONFIRMED</text>
+      </g>
+
+      <line x1="20" y1="70" x2="652" y2="70" stroke="#1e293b" stroke-width="1"/>
+
+      <!-- Attributes row -->
+      <g transform="translate(20, 95)" font-family="-apple-system, sans-serif" font-size="12" fill="#94a3b8">
+        <text x="0" y="0">Placed: Nov 06, 2026 • 22:45 UTC</text>
+        <text x="240" y="0">Currency: USD ($)</text>
+        <text x="440" y="0" fill="#10b981" font-weight="600">✓ Row-Locked Stock Allocated</text>
+      </g>
+    </g>
+
+    <!-- Line Items Table Card -->
+    <g transform="translate(24, 272)">
+      <rect width="672" height="340" rx="10" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+      
+      <text x="20" y="32" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Order Items (2 line items)</text>
+
+      <!-- Table Header -->
+      <g transform="translate(20, 52)">
+        <rect width="632" height="32" rx="4" fill="#1e293b" fill-opacity="0.6"/>
+        <text x="12" y="20" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" text-transform="uppercase">Product Name</text>
+        <text x="260" y="20" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" text-transform="uppercase">SKU</text>
+        <text x="400" y="20" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" text-transform="uppercase" text-anchor="end">Unit Price</text>
+        <text x="480" y="20" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" text-transform="uppercase" text-anchor="middle">Qty</text>
+        <text x="616" y="20" fill="#64748b" font-family="-apple-system, sans-serif" font-size="11" font-weight="600" text-transform="uppercase" text-anchor="end">Subtotal</text>
+      </g>
+
+      <!-- Row 1 -->
+      <g transform="translate(20, 96)">
+        <text x="12" y="20" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="13" font-weight="600">AMD EPYC 9654 Processor</text>
+        <rect x="256" y="8" width="96" height="18" rx="4" fill="#334155" fill-opacity="0.5"/>
+        <text x="262" y="20" fill="#38bdf8" font-family="monospace" font-size="10">SKU-EPYC-9654</text>
+        <text x="400" y="20" fill="#cbd5e1" font-family="-apple-system, sans-serif" font-size="13" text-anchor="end">$11,899.00</text>
+        <text x="480" y="20" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle">1</text>
+        <text x="616" y="20" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="end">$11,899.00</text>
+        <line x1="0" y1="36" x2="632" y2="36" stroke="#1e293b" stroke-width="1"/>
+      </g>
+
+      <!-- Row 2 -->
+      <g transform="translate(20, 144)">
+        <text x="12" y="20" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="13" font-weight="600">Samsung PM1743 15.36TB NVMe</text>
+        <rect x="256" y="8" width="108" height="18" rx="4" fill="#334155" fill-opacity="0.5"/>
+        <text x="262" y="20" fill="#38bdf8" font-family="monospace" font-size="10">SKU-SAMS-PM1743</text>
+        <text x="400" y="20" fill="#cbd5e1" font-family="-apple-system, sans-serif" font-size="13" text-anchor="end">$2,450.00</text>
+        <text x="480" y="20" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="middle">2</text>
+        <text x="616" y="20" fill="#f8fafc" font-family="-apple-system, sans-serif" font-size="13" font-weight="700" text-anchor="end">$4,900.00</text>
+        <line x1="0" y1="36" x2="632" y2="36" stroke="#1e293b" stroke-width="1"/>
+      </g>
+
+      <!-- Total Row -->
+      <g transform="translate(20, 220)">
+        <rect width="632" height="64" rx="8" fill="#1e293b" fill-opacity="0.5"/>
+        <text x="360" y="38" fill="#94a3b8" font-family="-apple-system, sans-serif" font-size="14" font-weight="600" text-anchor="end">Order Grand Total:</text>
+        <text x="616" y="42" fill="#38bdf8" font-family="-apple-system, sans-serif" font-size="22" font-weight="800" text-anchor="end">$16,799.00 USD</text>
+      </g>
+    </g>
+  </g>
+</svg>
+

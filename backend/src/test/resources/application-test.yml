@@ -1,0 +1,31 @@
+# Test Profile Configuration
+# Uses embedded H2 in PostgreSQL mode for fast, self-contained unit and slice tests
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:stockguard_test;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+    hikari:
+      maximum-pool-size: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+
+  flyway:
+    enabled: false
+
+logging:
+  level:
+    root: WARN
+    com.stockguard: INFO
+    org.springframework: WARN
+
+stockguard:
+  environment: test
+  jwt:
+    secret: stockguard_test_secret_key_that_is_at_least_256_bits_long_for_hmac_sha256!
+    expiration-ms: 3600000
