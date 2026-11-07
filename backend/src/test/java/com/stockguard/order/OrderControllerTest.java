@@ -287,6 +287,17 @@ class OrderControllerTest {
         mockMvc.perform(get("/api/v1/orders/" + orderId)
                         .header("Authorization", "Bearer " + customerToken2))
                 .andExpect(status().isNotFound());
+
+        // 4. Admin accesses Customer 1's order -> 200 OK (support / auditing access)
+        mockMvc.perform(get("/api/v1/orders/" + orderId)
+                        .header("Authorization", "Bearer " + adminToken))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.id", is((int) orderId)))
+                .andExpect(jsonPath("$.data.customerId", is(customer1.getId().intValue())));
+
+        // 5. Unauthenticated request -> 401 Unauthorized
+        mockMvc.perform(get("/api/v1/orders/" + orderId))
+                .andExpect(status().isUnauthorized());
     }
 
     @Test

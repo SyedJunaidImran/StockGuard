@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Customer REST Controller for placing orders and querying order history.
- * Strictly guarded: only authenticated users with ROLE_CUSTOMER may access these endpoints.
+ * REST Controller for placing orders and querying order history.
+ * Order creation and customer order history are strictly guarded by ROLE_CUSTOMER.
+ * Individual order inspection is accessible by the owning customer or administrators.
  */
 @RestController
 @RequestMapping("/api/v1/orders")
-@PreAuthorize("hasRole('CUSTOMER')")
 public class OrderController {
 
     private final OrderService orderService;
@@ -45,6 +45,7 @@ public class OrderController {
      * @return 201 Created with order snapshot details
      */
     @PostMapping
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<ApiResponse<OrderResponse>> createOrder(
             @Valid @RequestBody OrderCreateRequest request,
             @RequestHeader(value = "Idempotency-Key", required = false) String idempotencyKey,
@@ -67,6 +68,7 @@ public class OrderController {
      * @return 200 OK with paginated order history
      */
     @GetMapping
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<ApiResponse<PageResponse<OrderResponse>>> getMyOrders(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
@@ -77,13 +79,14 @@ public class OrderController {
     }
 
     /**
-     * Retrieves an order by ID ensuring ownership by the authenticated customer.
+     * Retrieves an order by ID. Accessible to the customer who placed the order or an administrator.
      *
-     * @param id             Order ID
-     * @param principal Authenticated CUSTOMER principal
+     * @param id        Order ID
+     * @param principal Authenticated CUSTOMER or ADMIN principal
      * @return 200 OK with order details
      */
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyRole('CUSTOMER', 'ADMIN')")
     public ResponseEntity<ApiResponse<OrderResponse>> getOrderById(
             @PathVariable Long id,
             @AuthenticationPrincipal UserPrincipal principal
