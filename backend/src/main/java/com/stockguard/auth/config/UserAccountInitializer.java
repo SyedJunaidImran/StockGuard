@@ -22,7 +22,9 @@ import java.util.Optional;
  *   <li>Idempotently seeds the pre-configured CUSTOMER demo account for evaluation/recruiter testing.</li>
  *   <li>Securely provisions or updates the administrator account if configured via
  *       server-side environment variables, without exposing credentials in frontend code or logs.</li>
- *   <li>Preserves existing database accounts and never overwrites them unexpectedly.</li>
+ *   <li>Fails startup if incomplete administrator environment variables are configured.</li>
+ *   <li>Prevents silent elevation of existing CUSTOMER accounts to ADMIN.</li>
+ *   <li>Preserves existing database accounts and never resets demo credentials across restarts.</li>
  * </ul>
  */
 @Component
@@ -101,45 +103,67 @@ public class UserAccountInitializer implements ApplicationRunner {
 
     /**
      * Securely provisions or rotates password for the administrator account from environment variables.
-     * If STOCKGUARD_ADMIN_EMAIL and STOCKGUARD_ADMIN_PASSWORD are not provided, existing database
-     * admin accounts remain untouched.
+     * <ul>
+     *   <li>Fails startup if only one of email or password is supplied.</li>
+     *   <li>Fails startup if configured email matches an existing CUSTOMER account (prevents silent privilege escalation).</li>
+     *   <li>Rotates password via BCrypt if an existing ADMIN account matches.</li>
+     *   <li>Provisions a new ADMIN account with BCrypt password if no account exists.</li>
+     * </ul>
      */
     private void configureAdminAccountFromEnvironment() {
-        if (!StringUtils.hasText(adminEmail) || !StringUtils.hasText(adminPassword)) {
+        boolean hasEmail = StringUtils.hasText(adminEmail);
+        boolean hasPassword = StringUtils.hasText(adminPassword);
+
+        // Fail startup if partial configuration is provided
+        if (hasEmail ^ hasPassword) {
+            throw new IllegalStateException(
+                    "Invalid administrator configuration: Both STOCKGUARD_ADMIN_EMAIL and STOCKGUARD_ADMIN_PASSWORD " +
+                    "must be provided together when configuring admin access via environment variables."
+            );
+        }
+
+        // If neither is configured, preserve existing database accounts untouched
+        if (!hasEmail) {
             log.debug("No admin environment credentials supplied; preserving existing database admin configuration.");
             return;
         }
 
         String normalizedEmail = adminEmail.trim().toLowerCase();
-        try {
-            Optional<User> existingUserOpt = userRepository.findByEmailIgnoreCase(normalizedEmail);
-            if (existingUserOpt.isPresent()) {
-                User user = existingUserOpt.get();
-                user.setPasswordHash(passwordEncoder.encode(adminPassword));
-                user.setRole(Role.ADMIN);
-                user.setActive(true);
-                if (StringUtils.hasText(adminFirstName)) {
-                    user.setFirstName(adminFirstName.trim());
-                }
-                if (StringUtils.hasText(adminLastName)) {
-                    user.setLastName(adminLastName.trim());
-                }
-                userRepository.save(user);
-                log.info("Administrator account [{}] successfully synchronized from environment configuration.", normalizedEmail);
-            } else {
-                User newAdmin = new User(
-                        normalizedEmail,
-                        passwordEncoder.encode(adminPassword),
-                        StringUtils.hasText(adminFirstName) ? adminFirstName.trim() : "System",
-                        StringUtils.hasText(adminLastName) ? adminLastName.trim() : "Admin",
-                        Role.ADMIN
+        Optional<User> existingUserOpt = userRepository.findByEmailIgnoreCase(normalizedEmail);
+
+        if (existingUserOpt.isPresent()) {
+            User user = existingUserOpt.get();
+
+            // Guard against silent customer elevation
+            if (user.getRole() != Role.ADMIN) {
+                throw new IllegalStateException(
+                        "Security violation: Configured STOCKGUARD_ADMIN_EMAIL matches an existing CUSTOMER account [" +
+                        normalizedEmail + "]. Customer accounts cannot be silently elevated to ADMIN via environment configuration."
                 );
-                userRepository.save(newAdmin);
-                log.info("Administrator account [{}] successfully provisioned from environment configuration.", normalizedEmail);
             }
-        } catch (Exception ex) {
-            log.error("Failed to synchronize administrator account from environment configuration: {}", ex.getMessage());
+
+            // Existing ADMIN account: rotate password securely using BCrypt
+            user.setPasswordHash(passwordEncoder.encode(adminPassword));
+            user.setActive(true);
+            if (StringUtils.hasText(adminFirstName)) {
+                user.setFirstName(adminFirstName.trim());
+            }
+            if (StringUtils.hasText(adminLastName)) {
+                user.setLastName(adminLastName.trim());
+            }
+            userRepository.save(user);
+            log.info("Administrator account [{}] successfully synchronized from environment configuration (password rotated).", normalizedEmail);
+        } else {
+            // Provision new ADMIN account
+            User newAdmin = new User(
+                    normalizedEmail,
+                    passwordEncoder.encode(adminPassword),
+                    StringUtils.hasText(adminFirstName) ? adminFirstName.trim() : "System",
+                    StringUtils.hasText(adminLastName) ? adminLastName.trim() : "Admin",
+                    Role.ADMIN
+            );
+            userRepository.save(newAdmin);
+            log.info("Administrator account [{}] successfully provisioned from environment configuration.", normalizedEmail);
         }
     }
 }
-

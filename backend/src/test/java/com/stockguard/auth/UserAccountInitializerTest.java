@@ -18,6 +18,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -102,26 +103,63 @@ class UserAccountInitializerTest {
     }
 
     @Test
-    @DisplayName("Updates existing user to admin and updates password when matching email is found")
-    void testUpdatesExistingUserToAdmin() {
+    @DisplayName("Rotates password for existing ADMIN user securely using BCrypt")
+    void testRotatesPasswordForExistingAdmin() {
         when(userRepository.existsByEmailIgnoreCase("customer@stockguard.io")).thenReturn(true);
-        ReflectionTestUtils.setField(initializer, "adminEmail", "existing@stockguard.io");
+        ReflectionTestUtils.setField(initializer, "adminEmail", "admin@stockguard.io");
         ReflectionTestUtils.setField(initializer, "adminPassword", "RotatedSecret123!");
         ReflectionTestUtils.setField(initializer, "adminFirstName", "UpdatedFirst");
         ReflectionTestUtils.setField(initializer, "adminLastName", "UpdatedLast");
 
-        User existingUser = new User("existing@stockguard.io", "old-hash", "OldFirst", "OldLast", Role.CUSTOMER);
-        when(userRepository.findByEmailIgnoreCase("existing@stockguard.io")).thenReturn(Optional.of(existingUser));
+        User existingAdmin = new User("admin@stockguard.io", "old-hash", "OldFirst", "OldLast", Role.ADMIN);
+        when(userRepository.findByEmailIgnoreCase("admin@stockguard.io")).thenReturn(Optional.of(existingAdmin));
         when(passwordEncoder.encode("RotatedSecret123!")).thenReturn("new-rotated-hash");
 
         initializer.run(args);
 
-        verify(userRepository).save(existingUser);
-        assertEquals("new-rotated-hash", existingUser.getPasswordHash());
-        assertEquals(Role.ADMIN, existingUser.getRole());
-        assertEquals("UpdatedFirst", existingUser.getFirstName());
-        assertEquals("UpdatedLast", existingUser.getLastName());
-        assertTrue(existingUser.isActive());
+        verify(userRepository).save(existingAdmin);
+        assertEquals("new-rotated-hash", existingAdmin.getPasswordHash());
+        assertEquals(Role.ADMIN, existingAdmin.getRole());
+        assertEquals("UpdatedFirst", existingAdmin.getFirstName());
+        assertEquals("UpdatedLast", existingAdmin.getLastName());
+        assertTrue(existingAdmin.isActive());
+    }
+
+    @Test
+    @DisplayName("Fails startup safely if STOCKGUARD_ADMIN_EMAIL matches an existing CUSTOMER account")
+    void testFailsWhenEmailMatchesExistingCustomer() {
+        when(userRepository.existsByEmailIgnoreCase("customer@stockguard.io")).thenReturn(true);
+        ReflectionTestUtils.setField(initializer, "adminEmail", "customer.vip@stockguard.io");
+        ReflectionTestUtils.setField(initializer, "adminPassword", "TryToElevate123!");
+
+        User existingCustomer = new User("customer.vip@stockguard.io", "cust-hash", "Vip", "Customer", Role.CUSTOMER);
+        when(userRepository.findByEmailIgnoreCase("customer.vip@stockguard.io")).thenReturn(Optional.of(existingCustomer));
+
+        IllegalStateException ex = assertThrows(IllegalStateException.class, () -> initializer.run(args));
+        assertTrue(ex.getMessage().contains("Security violation: Configured STOCKGUARD_ADMIN_EMAIL matches an existing CUSTOMER account"));
+        verify(userRepository, never()).save(existingCustomer);
+    }
+
+    @Test
+    @DisplayName("Fails startup safely if only STOCKGUARD_ADMIN_EMAIL is configured")
+    void testFailsWhenOnlyEmailConfigured() {
+        when(userRepository.existsByEmailIgnoreCase("customer@stockguard.io")).thenReturn(true);
+        ReflectionTestUtils.setField(initializer, "adminEmail", "admin@stockguard.io");
+        ReflectionTestUtils.setField(initializer, "adminPassword", "");
+
+        IllegalStateException ex = assertThrows(IllegalStateException.class, () -> initializer.run(args));
+        assertTrue(ex.getMessage().contains("Invalid administrator configuration: Both STOCKGUARD_ADMIN_EMAIL and STOCKGUARD_ADMIN_PASSWORD must be provided together"));
+    }
+
+    @Test
+    @DisplayName("Fails startup safely if only STOCKGUARD_ADMIN_PASSWORD is configured")
+    void testFailsWhenOnlyPasswordConfigured() {
+        when(userRepository.existsByEmailIgnoreCase("customer@stockguard.io")).thenReturn(true);
+        ReflectionTestUtils.setField(initializer, "adminEmail", "");
+        ReflectionTestUtils.setField(initializer, "adminPassword", "OnlyPasswordProvided123!");
+
+        IllegalStateException ex = assertThrows(IllegalStateException.class, () -> initializer.run(args));
+        assertTrue(ex.getMessage().contains("Invalid administrator configuration: Both STOCKGUARD_ADMIN_EMAIL and STOCKGUARD_ADMIN_PASSWORD must be provided together"));
     }
 
     @Test
@@ -137,4 +175,3 @@ class UserAccountInitializerTest {
         verify(userRepository, never()).save(any(User.class));
     }
 }
-
