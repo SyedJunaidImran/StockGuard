@@ -13,6 +13,11 @@ spring:
       max-lifetime: 900000
       leak-detection-threshold: 15000
 
+  flyway:
+    # Do not enable baseline-on-migrate blindly in production to prevent silently skipping migrations.
+    # Set to true only if deploying against a legacy database that already contains schema tables without flyway_schema_history.
+    baseline-on-migrate: ${SPRING_FLYWAY_BASELINE_ON_MIGRATE:false}
+
   jpa:
     show-sql: false
     properties:

@@ -342,9 +342,9 @@ See [docs/TESTING.md](docs/TESTING.md) for full scenario walkthroughs and CI set
 | **Phase 3: Catalog & Products** | Real-time product catalog, dynamic multi-field search, category filtering, allowlisted sorting, pagination, admin CRUD | **Completed** |
 | **Phase 4: Inventory Engine** | Available & reserved stock tracking, row locks, administrative adjustments (ADD/REMOVE), immutable audit ledger | **Completed** |
 | **Phase 5: Concurrency & Orders** | Concurrency-safe customer order checkout, pessimistic row locks, cart persistence, price snapshots, ownership isolation | **Completed** |
-| **Phase 6: PostgreSQL & Idempotency** | Idempotency keys, transaction-gap race condition elimination, stalled/failed recovery, Testcontainers integration harness | **Implementation Completed** *(CI verification pending)* |
-| **Phase 7: PostgreSQL CI Verification** | Execute GitHub Actions workflow with live PostgreSQL 16 container verifying all 7 concurrency integration scenarios | **Pending CI Execution** |
-| **Phase 8: Production Deployment** | Cloud infrastructure provisioning (Render / Supabase / Railway), environment secrets, SSL termination, CDN distribution | *Planned* |
+| **Phase 6: PostgreSQL & Idempotency** | Idempotency keys, transaction-gap race condition elimination, stalled/failed recovery, Testcontainers integration harness | **Completed** |
+| **Phase 7: PostgreSQL CI Verification** | Execute GitHub Actions workflow with live PostgreSQL 16 container verifying all 7 concurrency integration scenarios | **Completed** *(All 7 scenarios green)* |
+| **Phase 8: Production Deployment** | Cloud infrastructure configuration (Render / Supabase / Vercel), environment secrets, SSL termination, CDN distribution | **Deployment-Ready** ([Guide](docs/DEPLOYMENT.md)) |
 | **Phase 9: Live Testing & Portfolio** | Production smoke verification, live telemetry validation, architecture walkthrough, and portfolio presentation | *Planned* |
 
 See [docs/ROADMAP.md](docs/ROADMAP.md) for full phase-by-phase engineering deliverables and architectural rationale.
