@@ -323,7 +323,7 @@ See [docs/TESTING.md](docs/TESTING.md) for full scenario walkthroughs and CI set
 
 > [!NOTE]
 > **Deployment Status: DEPLOYMENT-READY.**
-> StockGuard is verified across both local containerized environments and GitHub Actions CI with live PostgreSQL 16. Cloud deployment configurations ([`render.yaml`](render.yaml), [`frontend/vercel.json`](frontend/vercel.json), and [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)) are prepared and ready for provisioning on Supabase, Render, and Vercel.
+> StockGuard is verified through local development testing and GitHub Actions CI with live PostgreSQL 16 integration tests. Cloud deployment configurations ([`render.yaml`](render.yaml), [`frontend/vercel.json`](frontend/vercel.json), and [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)) are prepared and ready for provisioning on Supabase, Render, and Vercel.
 
 ### Planned Production Cloud Topology:
 * **Managed Database:** Hosted PostgreSQL 16 on **Supabase** or **Render Postgres** with connection pooling (HikariCP tuned for Supavisor session/transaction mode) and SSL enforcement (`sslmode=require`).
