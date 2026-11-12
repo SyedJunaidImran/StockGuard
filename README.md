@@ -18,7 +18,7 @@ Built with **Java 21 LTS**, **Spring Boot 3.3**, **PostgreSQL 16**, and **React 
 
 ### Quick Links
 * **GitHub Repository:** [https://github.com/SyedJunaidImran/StockGuard](https://github.com/SyedJunaidImran/StockGuard)
-* **Live Frontend Demo (Vercel):** [https://stockguard.vercel.app](https://stockguard.vercel.app) *(Deployment-Ready)*
+* **Live Frontend Demo (Vercel):** [https://stockguardd.vercel.app/](https://stockguardd.vercel.app/)
 * **Live Backend API & Health Telemetry (Render):** `https://stockguard-backend.onrender.com/api/v1/health`
 * **Production Deployment Guide:** [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 * **System Architecture & Sequence Diagrams:** [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
